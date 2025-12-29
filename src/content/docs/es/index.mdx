@@ -1,0 +1,165 @@
+---
+title: Lineamientos para Escribir Código Bonito
+description: Francisco Zavalla & Matías David Lee
+# template: splash # Remove or comment out this line to display the site sidebar on this page.
+hero:
+  tagline: Francisco Zavalla & Matías David Lee
+  image:
+    file: /src/assets/houston.webp
+---
+
+
+> <p style="text-align: right">_Estás leyendo este libro por dos razones. La primera, sos un programador.
+Y la segunda, es que querés ser un mejor programador.
+Eso es bueno. Necesitamos mejores programadores._</p>
+<p style="text-align: right">— Clean Code: A Handbook of Agile Software Craftsmanship.</p>
+
+
+
+Cuando se estudia una carrera relacionada con la programación, se abordan diversas áreas que conforman la disciplina.
+Por ejemplo, en la Licenciatura en Ciencias de la Computación de la FAMAF, se estudian temas como algoritmos, lógica,
+matemáticas, bases de datos, sistemas operativos, ingeniería del software, paradigmas de programación, compiladores,
+entre otros más específicos. En la mayoría de estas materias, una actividad común es programar. Programar consiste en
+escribir secuencias de órdenes que una computadora puede ejecutar para realizar una tarea específica. Al programar
+obtenemos programas que podemos analizar desde múltiples dimensiones: ¿qué hace? ¿cómo lo hace? ¿es claro? ¿se puede
+probar su funcionamiento? ¿posee una buena modularización? ¿hay acoplamiento entre los módulos? ¿utilizan algún patrón
+de diseño? ¿es seguro?
+
+Todos estos aspectos son fundamentales para desarrollar un software de alta calidad. Sin embargo, durante la formación
+académica suelen tratarse como elementos complementarios en lugar de objetivos centrales. Como consecuencia, no existe
+un momento donde los estudiantes puedan aprender estos principios, ni mucho menos una fuente de referencia concreta
+para escribir código de calidad.
+
+## Código Bonito
+En matemática se habla de demostraciones elegantes. Estas demostraciones no solo son correctas, sino también están bien
+estructuradas y utilizan los elementos adecuados para simplificar la tarea de demostración. Si bien el concepto de
+elegancia no está definido formalmente (algo raro si tenemos en cuenta que en matemática todo parte de una definición
+precisa), los matemáticos saben reconocer cuando se encuentran con una demostración elegante.
+
+En programación queremos definir un término análogo: código bonito. Así como en matemática no existe una definición
+formal de elegancia, nosotros tampoco daremos una definición formal de bonito. Sólo diremos que un código es bonito si
+es claro, prolijo y está bien estructurado. En otras palabras, el código bonito está en las antípodas del
+[código espagueti](https://es.wikipedia.org/wiki/C%C3%B3digo_espagueti). Como pasa con la elegancia en la matemática,
+todo desarrollador con experiencia y conocimiento sabrá identificarlo y apreciarlo.
+
+Lamentablemente, el código bonito no abunda. La experiencia acumulada por profesionales de la industria y docentes
+evidencian que este tipo de código, en general, brilla por su ausencia. Este trabajo tiene como objetivo recopilar
+prácticas y recomendaciones ya conocidas, así como aportar nuevas ideas que ayuden a los desarrolladores a escribir
+mejor código.
+
+## ¿Por qué enseñar/aprender a programar es difícil?
+
+Si tuviéramos que hacer una analogía entre la profesión de desarrollador con otra, probablemente la mayoría de los
+desarrolladores con experiencia estarían de acuerdo que programar se parece más a ser un albañil que un abogado. Un
+albañil construye desde cero o trabaja sobre obras ya empezadas. En el segundo caso, tirar todo lo construido no es
+una opción, hay que adaptarse a lo que se hizo. En el mundo de la programación, muchas tareas son repetitivas, como
+levantar paredes en la construcción, pero sin estas cosas repetitivas, no habría una obra completa. Sumado a esto,
+toda obra tiene sus particularidades, que en muchos casos impactan en todo el proyecto, aún en las tareas más
+estándares.
+
+Esta analogía entre desarrollador-albañil da la clave para entender porque enseñar/aprender a programar es difícil:
+programar es un oficio. La particularidad de los oficios es que se aprenden a través de la experiencia directa, uno
+puede leer libros y ver videos sobre como levantar una pared/programar, pero no se aprenderá realmente la tarea hasta
+dedicarle muchas horas a la misma. Es más, haber levantado miles de paredes no te hará necesariamente un buen albañil
+y, de forma similar, haber programado miles de líneas de código no te hará un buen desarrollador. Esto se debe a que
+todo oficio tiene sus buenas prácticas, lineamientos que se deben seguir y el hacer por hacer no te garantiza
+aprenderlos.
+
+En los oficios con más historia (albañil, zapatero, carpintero, etc), este problema se resuelve con la figura del
+maestro. Los maestros son las personas con más experiencia en el oficio y tienen como responsabilidad el traspasar sus
+conocimientos a los aprendices. Este traspaso de conocimiento sucede en la práctica: mientras el aprendiz realiza
+alguna tarea, el maestro observa, y en base a lo que observa, brinda consejos, realiza correcciones y agrega
+explicaciones siempre que la situación lo requiera.
+
+Volviendo al oficio de programar, podemos decir que en el mundo de la programación, principalmente en la parte
+académica, no existe la figura de maestro de la programación. Enumeremos algunas de las razones para pensar esto:
+
+- **Muchos docentes no ejercen el oficio de programar.** Muchos docentes son académicos, entonces en su día a día no
+programan. Si no programan es difícil que sean maestros de la programación. Es más, probablemente tampoco sea para
+ellos una prioridad el enseñar a programar código bonito, tienen otras cosas importantes que enseñar y eso no está mal.
+
+- **Corregir el código es costoso.** Supongamos ahora que tenemos un grupo de docentes que sí saben programar. Aún así,
+revisar el código de los alumnos uno por uno sería imposible por el tiempo que eso llevaría. La tarea sería más
+imposible si le sumamos correcciones escritas y/o devoluciones uno a uno. Para complicar más la situación, sumémosle a
+esto el hecho de que las carreras informáticas cada vez se vuelven más populares -más alumnos- mientras que el número
+de docentes disminuye por encontrar ofertas laborales más atractivas.
+- **Los tiempos de los proyectos de programación son cortos.** Los proyectos universitarios buscan enseñar conceptos
+claves de la informática (deadlocks, multiprocesamiento, simulaciones, protocolos TCP/UDP, programación de
+microcontroladores, etc.) en pocos meses. Estos conceptos pueden enseñarse perfectamente realizando proyectos de
+programación que no siguen buenas prácticas. Forzar a los alumnos a seguirlas durante el proyecto -teniendo en cuenta
+el tiempo limitado con el que se cuenta- podría atentar con el objetivo principal del mismo.
+
+Entonces, **¿se podría introducir la figura de maestros de la programación en las instituciones académicas?**
+Entendemos que sí, pero esto podría requerir mucho más recursos humanos y financieros que no abundan en el mercado
+laboral informático/universitario del mundo de hoy. De todas formas, esta discusión está fuera del objetivo de este
+trabajo.
+
+## Objetivo y organización de este trabajo
+
+Programar bien es complejo. Hacerlo dentro de una industria lo es aún más, pues esto implica conocer la lógica de los
+procesos que ahí se desarrollan. Sumado a esto, todo software que se vende/utiliza cómo producto debe satisfacer
+muchos aspectos técnicos para que el mismo sea viable. Por ejemplo, aspectos relacionados al desempeño, seguridad,
+manejo correcto de los datos, etc.
+
+El objetivo de este trabajo no es abarcar todos estos problemas. Por el contrario, buscamos definir una **línea base**
+para programar bien. Para eso vamos a introducir una serie de lineamientos que entendemos se aplican casi siempre en
+todo contexto. También queremos que este trabajo tenga impacto, es decir, que muchas personas lo lean. Por esta razón,
+trataremos de ser lo más concretos posibles en cada sección que presentemos. Creemos que este trabajo será sumamente
+valioso para las personas que están dando sus primeros pasos en la informática y puede servir como material de
+referencia para materias donde se haga mucho foco en programar.
+
+A lo largo del trabajo, vamos a presentar diversas secciones:
+
+- Sintaxis y semántica
+- Estructuras de funciones
+- Documentación y comentarios
+- Organización de un proyecto de software
+- Testing
+
+
+En el capítulo de **Sintaxis y Semántica** pondremos énfasis en que al momento de escribir código, se tiene que ser lo
+más evidente posible con respecto al objetivo del sistema que uno está escribiendo. Para esto es fundamental la
+elección de buenos nombres y el uso de tipos. En **Diseño de Funciones** daremos lineamientos para escribir funciones
+prolijas, ya que estas son más fáciles de entender, utilizar y modificar. El capítulo sobre **Documentación y
+Comentarios** será un capítulo muy corto sobre la importancia de documentar el código y lineamientos para hacerlo de
+la forma correcta.
+
+En **Organización de un Proyecto de Software**, nos alejaremos un poco del código para hablar de la estructura del
+mismo. Introduciremos el concepto de capas que podemos encontrar en los proyectos y cómo éstas nos ayudan a organizar
+el código. Hablaremos también de cómo las clases y la inyección de dependencias nos ayudan a organizarnos. Además
+utilizaremos un proyecto real como hilo conductor del capítulo.
+
+Para terminar, nos centraremos en las pruebas que se pueden realizar sobre el código, también conocido como
+**testing**. Nuevamente, nos apoyaremos en el proyecto de ejemplo presentado en el capítulo previo para hablar sobre
+la Pirámide del Testing y los diferentes tipos de pruebas que podemos realizar.
+
+Para ejemplificar los lineamientos presentados, a lo largo del trabajo se utilizarán fragmentos de código en Python y
+JavaScript / TypeScript. Elegimos estos lenguajes principalmente por ser ampliamente utilizados en la industria y
+porque consideramos que permiten comprender los ejemplos sin requerir un nivel de conocimiento demasiado avanzado,
+facilitando así que el contenido sea accesible para un público más amplio.
+
+
+
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Secciones
+
+<CardGrid stagger>
+	<Card title="Update content" icon="pencil">
+		Edit `src/content/docs/index.mdx` to see this page change.
+	</Card>
+	<Card title="Change page layout" icon="document">
+		Delete `template: splash` in `src/content/docs/index.mdx` to display a
+		sidebar on this page.
+	</Card>
+	<Card title="Add new content" icon="add-document">
+		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	</Card>
+	<Card title="Configure your site" icon="setting">
+		Edit your `sidebar` and other config in `astro.config.mjs`.
+	</Card>
+	<Card title="Read the docs" icon="open-book">
+		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	</Card>
+</CardGrid>
