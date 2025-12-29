@@ -1,0 +1,110 @@
+
+---
+title: Guidelines for Writing Pretty Code
+description: Francisco Zavalla & Matías David Lee
+# template: splash # Remove or comment out this line to display the site sidebar on this page.
+hero:
+  tagline: Francisco Zavalla & Matías David Lee
+  image:
+    file: /src/assets/houston.webp
+---
+
+
+
+<p style="text-align: right">_You are reading this book for two reasons.
+The first is that you are a programmer.
+And the second is that you want to be a better programmer.
+That is good.
+We need better programmers._</p>
+
+<p style="text-align: right">— Clean Code: A Handbook of Agile Software Craftsmanship.</p>
+
+When studying a degree related to programming, diverse areas that make up the discipline are addressed.
+For example, in the Bachelor's Degree in Computer Science at FAMAF, topics such as algorithms, logic, mathematics, databases, operating systems, software engineering, programming paradigms, and compilers, among others that are more specific, are studied.
+In most of these subjects, a common activity is programming.
+Programming consists of writing sequences of orders that a computer can execute to perform a specific task.
+When programming, we obtain programs that we can analyze from multiple dimensions: What does it do? How does it do it? Is it clear? Can its operation be tested?
+Does it possess good modularization? Is there coupling between modules? Do they use any design pattern? Is it secure?
+All these aspects are fundamental for developing high-quality software.
+However, during academic training, they are usually treated as complementary elements rather than central objectives.
+As a consequence, there is no moment where students can learn these principles, nor is there a concrete reference source for writing quality code.
+
+## Pretty Code
+
+In mathematics, we speak of elegant proofs. These proofs are not only correct but also well-structured and use the appropriate elements to simplify the task of demonstration.
+While the concept of elegance is not formally defined (something rare considering that in mathematics everything starts from a precise definition), mathematicians know how to recognize when they encounter an elegant proof.
+In programming, we want to define an analogous term: pretty code. Just as in mathematics there is no formal definition of elegance, we will not give a formal definition of pretty.
+We will only say that code is pretty if it is clear, neat, and well-structured.
+In other words, pretty code is at the antipodes of [spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code).
+As happens with elegance in mathematics, every developer with experience and knowledge will know how to identify and appreciate it.
+Unfortunately, pretty code does not abound. The experience accumulated by industry professionals and teachers evidences that this type of code, in general, is conspicuous by its absence.
+This work aims to compile already known practices and recommendations, as well as contribute new ideas that help developers write better code.
+
+## Why is teaching/learning to program difficult?
+
+If we had to make an analogy between the profession of a developer and another, probably most experienced developers would agree that programming is more like being a bricklayer than a lawyer.
+A bricklayer builds from scratch or works on works already started.
+In the second case, tearing down everything built is not an option; one has to adapt to what was done.
+In the world of programming, many tasks are repetitive, like raising walls in construction, but without these repetitive things, there would be no complete work.
+Added to this, every work has its particularities, which in many cases impact the entire project, even in the most standard tasks.
+This analogy between developer-bricklayer gives the key to understanding why teaching/learning to program is difficult: programming is a trade.
+The particularity of trades is that they are learned through direct experience; one can read books and watch videos on how to build a wall/program, but the task will not truly be learned until dedicating many hours to it.
+Furthermore, having built thousands of walls will not necessarily make you a good bricklayer and, similarly, having programmed thousands of lines of code will not make you a good developer.
+This is because every trade has its good practices, guidelines that must be followed, and doing for the sake of doing does not guarantee learning them.
+In trades with more history (bricklayer, cobbler, carpenter, etc.), this problem is solved with the figure of the master.
+Masters are the people with the most experience in the trade and have the responsibility of passing on their knowledge to apprentices.
+This transfer of knowledge happens in practice: while the apprentice performs a task, the master observes, and based on what they observe, offers advice, makes corrections, and adds explanations whenever the situation requires it.
+Returning to the trade of programming, we can say that in the world of programming, mainly in the academic part, the figure of the master of programming does not exist.
+Let's list some of the reasons for thinking this:
+
+* **Many teachers do not exercise the trade of programming.** Many teachers are academics, so in their day-to-day they do not program.
+If they do not program, it is difficult for them to be masters of programming.
+Furthermore, it is probably not a priority for them to teach how to program pretty code either; they have other important things to teach, and that is not wrong.
+* **Grading code is costly.** Suppose now that we have a group of teachers who do know how to program.
+Even so, reviewing the students' code one by one would be impossible due to the time that would take.
+The task would be more impossible if we add written corrections and/or one-on-one feedback.
+To complicate the situation further, let's add to this the fact that computer degrees are becoming more popular—more students—while the number of teachers decreases finding more attractive job offers.
+* **Programming project times are short.** University projects seek to teach key computer science concepts (deadlocks, multiprocessing, simulations, TCP/UDP protocols, microcontroller programming, etc.) in a few months.
+These concepts can be taught perfectly by carrying out programming projects that do not follow good practices.
+Forcing students to follow them during the project—taking into account the limited time available—could threaten the main objective of the same.
+
+So, **could the figure of programming masters be introduced in academic institutions?**
+We understand that yes, but this could require many more human and financial resources that do not abound in the IT/university labor market of today's world.
+Anyway, this discussion is outside the scope of this work.
+
+## Objective and organization of this work
+
+Programming well is complex.
+Doing it within an industry is even more so, as this implies knowing the logic of the processes developed there.
+Added to this, all software that is sold/used as a product must satisfy many technical aspects for it to be viable.
+For example, aspects related to performance, security, correct data handling, etc.
+
+The objective of this work is not to cover all these problems.
+On the contrary, we seek to define a **baseline** for programming well.
+For that, we are going to introduce a series of guidelines that we understand apply almost always in every context.
+We also want this work to have an impact, that is, for many people to read it.
+For this reason, we will try to be as concrete as possible in each section we present.
+We believe that this work will be extremely valuable for people who are taking their first steps in computing and can serve as reference material for subjects where there is much focus on programming.
+Throughout the work, we are going to present various sections:
+
+* Syntax and semantics
+* Function structures
+* Documentation and comments
+* Organization of a software project
+* Testing
+
+In the chapter on **Syntax and Semantics**, we will place emphasis on the fact that when writing code, one has to be as evident as possible regarding the objective of the system one is writing.
+For this, the choice of good names and the use of types is fundamental.
+In **Function Design**, we will give guidelines for writing neat functions, as these are easier to understand, use, and modify.
+The chapter on **Documentation and Comments** will be a very short chapter on the importance of documenting code and guidelines for doing it correctly.
+In **Organization of a Software Project**, we will move away a bit from the code to talk about the structure of the same.
+We will introduce the concept of layers that we can find in projects and how these help us organize the code.
+We will also talk about how classes and dependency injection help us organize ourselves.
+Furthermore, we will use a real project as the guiding thread of the chapter.
+
+To finish, we will focus on the tests that can be performed on the code, also known as **testing**.
+Again, we will rely on the example project presented in the previous chapter to talk about the Testing Pyramid and the different types of tests we can perform.
+To exemplify the guidelines presented, throughout the work code fragments in Python and JavaScript / TypeScript will be used.
+We chose these languages mainly because they are widely used in the industry and because we consider that they allow understanding the examples without requiring too advanced a level of knowledge, thus facilitating the content being accessible to a broader audience.
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
