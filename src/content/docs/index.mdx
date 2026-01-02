@@ -6,19 +6,24 @@ hero:
   tagline: Francisco Zavalla & Matías David Lee
   image:
     file: /src/assets/houston.webp
+  actions:
+    - text: Nosotros
+      link: /es/about-us/
+      icon: right-arrow
 ---
 
 
-> <p style="text-align: right">_Estás leyendo este libro por dos razones. La primera, sos un programador.
+<p style="text-align: right">_Estás leyendo este libro por dos razones. La primera, sos un programador.
 Y la segunda, es que querés ser un mejor programador.
 Eso es bueno. Necesitamos mejores programadores._</p>
 <p style="text-align: right">— Clean Code: A Handbook of Agile Software Craftsmanship.</p>
 
 
-
 Cuando se estudia una carrera relacionada con la programación, se abordan diversas áreas que conforman la disciplina.
-Por ejemplo, en la Licenciatura en Ciencias de la Computación de la FAMAF, se estudian temas como algoritmos, lógica,
-matemáticas, bases de datos, sistemas operativos, ingeniería del software, paradigmas de programación, compiladores,
+Por ejemplo, en la Licenciatura en [Ciencias de la Computación](https://es.wikipedia.org/wiki/Ciencias_de_la_computación)
+de la [Facultad de Matemática, Astronomía, Física y Computación (FAMAF)](https://www.famaf.unc.edu.ar),
+se estudian temas como algoritmos, lógica, matemáticas, bases de datos, sistemas operativos, ingeniería del software,
+paradigmas de programación, compiladores,
 entre otros más específicos. En la mayoría de estas materias, una actividad común es programar. Programar consiste en
 escribir secuencias de órdenes que una computadora puede ejecutar para realizar una tarea específica. Al programar
 obtenemos programas que podemos analizar desde múltiples dimensiones: ¿qué hace? ¿cómo lo hace? ¿es claro? ¿se puede
@@ -142,24 +147,3 @@ facilitando así que el contenido sea accesible para un público más amplio.
 
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
-
-## Secciones
-
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
-</CardGrid>

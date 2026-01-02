@@ -7,7 +7,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Código Bonito',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/FranZavalla/codigo-bonito-api-rest' }],
 			defaultLocale: 'es',
  		    locales: {
 				es: {
