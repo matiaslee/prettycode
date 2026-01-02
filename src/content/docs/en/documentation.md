@@ -1,28 +1,49 @@
 ---
-title: Documentación y comentarios
+title: Documentation and Comments
 description: asdf
 ---
 
 
-## El valor de los comentarios en el código
+Code evolves constantly: it is modified, deleted, rewritten. During this process, developers must consider multiple
+factors, from preconditions and edge cases to assumptions that cannot always be expressed directly in the code. As a
+result, when a new developer joins the team or reviews the code, inevitable questions arise: *Why was this check not
+performed?* or *What is the reason behind this decision?* To avoid these situations, it is fundamental that the code
+clearly expresses those non-trivial considerations. In this chapter, we will address this topic through
+**documentation**.
 
-El código evoluciona constantemente: se modifica, se borra, se reescribe. Durante este proceso, los desarrolladores deben considerar múltiples factores, desde precondiciones y casos límite hasta suposiciones que no siempre pueden expresarse directamente en el código. Como resultado, cuando un nuevo desarrollador se une al equipo o revisa el código, surgen preguntas inevitables: *¿Por qué no se realizó este chequeo?* o *¿Cuál es la razón detrás de esta decisión?* Para evitar estas situaciones, es fundamental que el código exprese claramente esas consideraciones no triviales. En este capítulo trataremos este tema a través de la **documentación**.
+It is important to clarify that, although we will talk about documentation, we are not referring to the external
+documentation of a project, such as development plans or API descriptions. Documenting externally can be costly, as it
+requires constant maintenance to remain aligned with the code. Often, the reality of the system is in the code itself,
+and external documentation tends to lag behind, generating inconsistencies. Given this, experienced developers always
+end up reviewing the code before the documentation. It is for all this that we will focus on the internal documentation
+that accompanies the code and enriches it, helping developers to more quickly understand the **natural language
+semantics** of the code.
 
-Es importante aclarar que, aunque hablaremos de documentación, no nos referimos a la documentación externa de un proyecto, como planes de desarrollo o descripciones de una API. Documentar externamente puede ser costoso, ya que requiere un mantenimiento constante para mantenerse alineado con el código. Muchas veces, la realidad del sistema está en el código mismo, y la documentación externa tiende a quedarse atrás, lo que genera inconsistencias. Dado esto, los desarrolladores más experimentados siempre terminan revisando el código antes que la documentación. Es por todo esto que nos enfocaremos en la documentación interna que acompaña al código y lo enriquece, ayudando a desarrolladores a comprender más rápidamente la **semántica en lenguaje natural** del código.
+To make explicit the considerations that influence the code, two main tools are employed: informational comments and
+internal documentation comments. **Informational comments** are *annotations within the code, and explain decisions,
+assumptions, or momentarily point out aspects to review*. **Internal documentation comments**, on the other hand, refer
+to Python *docstrings* or JavaScript *JSDoc*, which provide descriptions for functions, classes, and modules.
 
-Para hacer explícitas las consideraciones que influyen en el código, se emplean dos herramientas principales: los comentarios informativos y los comentarios de documentación interna. Los **comentarios informativos** son *anotaciones dentro del código, y explican decisiones, suposiciones o señalan momentáneamente aspectos a revisar*. Los **comentarios de documentación interna**, por otro lado, se refieren a los *docstrings* de Python o *JSDoc* de JavaScript, los cuales proporcionan descripciones a las funciones, clases y módulos.
+Comments are also present in **natural language semantics**, that is, the *description of the program according to what
+the developer intends the code to do*. A well-written and readable code is not enough if it contains assumptions that
+only the original developer knows. Adding a precise comment can add a lot of value, as it contextualizes decisions and
+explains the *story* of the code. Just as a narrator describes the motivations of characters in a novel, a good comment
+can clarify a line of code that, at first glance, might seem confusing.
 
-Los comentarios también están presentes en la **semántica en lenguaje natural**, es decir, la *descripción del programa según lo que el desarrollador pretende que el código haga*. Un código bien escrito y legible no es suficiente si contiene suposiciones que sólo el desarrollador original conoce. Agregar un comentario preciso puede sumar mucho valor, ya que contextualiza decisiones y explica la *historia* del código. Del mismo modo que un narrador describe las motivaciones de los personajes en una novela, un buen comentario puede aclarar una línea de código que, a simple vista, podría parecer confusa.
+In this chapter, we will analyze comments and internal documentation in more depth. We will also give recommendations
+that differentiate any comment from one that is truly useful.
 
-En este capítulo analizaremos más a fondo los comentarios y documentación interna. Además daremos recomendaciones que diferencian a un comentario cualquiera de uno que realmente es útil.
+## Types of Documentation in Code
 
-## Tipos de documentación en el código
+As we have already seen, there are different types of comments, each with a specific purpose within the code.
+Understanding their differences is key to using them effectively and avoiding redundant or unnecessary comments.
 
-Como ya vimos, existen distintos tipos de comentarios, cada uno con un propósito específico dentro del código. Comprender sus diferencias es clave para utilizarlos de manera efectiva y evitar comentarios redundantes o innecesarios.
+### Informational Comments
 
-### Comentarios informativos
-
-Los comentarios informativos explican aspectos del código que no son evidentes a simple vista. Su propósito es aclarar decisiones de diseño, suposiciones o detalles importantes que podrían no ser obvios para otros desarrolladores. Estos comentarios no siguen un formato rígido y pueden encontrarse tanto en una única línea como en un conjunto de estas (comentario en bloque). Al usarlos nos estamos anticipando a las dudas del lector, respondiendo preguntas que aún no se han formulado. Veamos un ejemplo:
+Informational comments explain aspects of the code that are not evident at first glance. Their purpose is to clarify
+design decisions, assumptions, or important details that might not be obvious to other developers. These comments do not
+follow a rigid format and can be found both in a single line and in a set of them (block comment). By using them we are
+anticipating the reader's doubts, answering questions that have not yet been formulated. Let's look at an example:
 
 ```typescript
 type Coordinates = {
@@ -49,61 +70,97 @@ function calculateDistanceBetweenSatellites(
 
     // Code...
 }
+
 ```
 
-Sin el comentario, la operación matemática principal podría parecer un cálculo arbitrario. Sin embargo, busca responder una pregunta clave: *¿De donde proviene este cálculo?* Notar que este comentario podría no ser necesario si en su lugar escribimos una función con un nombre descriptivo que realice el cálculo de la distancia, dejando los comentarios sólo para aclaraciones que el código por sí solo no pueda transmitir.
+Without the comment, the main mathematical operation might seem like an arbitrary calculation. However, it seeks to
+answer a key question: *Where does this calculation come from?* Note that this comment might not be necessary if
+instead we write a function with a descriptive name that performs the distance calculation, leaving comments only for
+clarifications that the code alone cannot convey.
 
-Si un comentario hace referencia a varias sentencias, puede ser una señal de que esas líneas deberían ser encapsuladas en una función. Si a esa función le sumamos un nombre descriptivo, tenemos una función que puede explicarse por si misma, evitando así el uso de comentarios. Idealmente, **el código no debería depender de comentarios para su comprensión**. Aunque a veces es necesario aclarar aspectos que no se pueden expresar con el código, estos casos deberían ser la excepción y no la regla.
-
-> Los comentarios informativos deben utilizarse excepcionalmente.
-
-Existen situaciones donde los comentarios informativos pueden aportar un valor real al código y debemos asegurarnos de que esto realmente ocurra. Una sentencia y un comentario ocupan el mismo espacio en pantalla, por eso es que debemos saber cuando utilizarlos. Ahora bien, ¿qué debería incluir un comentario útil?
-
-  * **El *por qué* más que el *qué*:** Un comentario debe aclarar la intención detrás de una sentencia, en lugar de describir lo que hace.
-  * **Contexto adicional que el código no pueda expresar por sí mismo:** Por ejemplo, si hay una limitación técnica o una convención específica que seguir.
-  * **Decisiones técnicas importantes:** Explicar por qué se eligió una estructura de datos sobre otra o por qué se implementó un algoritmo en particular.
-  * **Explicación de soluciones no triviales:** Si se resolvió un problema de manera poco convencional, es útil documentarlo para futuros desarrolladores.
-
-No sólo es importante saber cuándo y qué comentar, sino también cómo hacerlo. Un buen comentario debe ser claro y fácil de entender sin omitir detalles esenciales. Además, debe ser breve y directo, evitando cualquier aclaración innecesaria.
-
-### Comentarios de marca
-
-Dentro de los comentarios informativos, podemos encontrar una subcategoría: los **comentarios de marca**. A diferencia de los comentarios que explican el código, estos buscan comunicar información a los desarrolladores señalando posibles problemas, tareas pendientes o errores conocidos. Se distinguen porque comienzan con una *palabra de marca* escrita en mayúsculas lo que facilita su identificación en el código. Algunas de las marcas más comunes son:
-
-  * **TODO**: Indica una tarea pendiente o alguna funcionalidad que necesita ser implementada.
-  * **FIXME**: Indica un problema que necesita ser revisado.
-  * **BUG**: Señala un error conocido que debe ser solucionado.
-  * **HACK**: Marca una solución temporal o poco ideal que podría mejorarse.
-
-Grandes equipos de trabajo o empresas suelen definir convenciones sobre cuándo y cómo utilizar estas marcas. En algunos casos, incluso crean sus propias *palabras de marca* para reflejar necesidades específicas dentro del proyecto.
-
-No debemos olvidar que estos comentarios deben ser temporales y no permanecer indefinidamente en el código. Idealmente, si se está trabajando en código aledaño y es posible resolver el comentario es bueno hacerlo. Otra opción es, de manera periódica, realizar una búsqueda global en el proyecto para identificar estas anotaciones.
-
-## Documentación interna
-
-En la **semántica en lenguaje natural**, a veces un buen nombre de función o variable simplemente no alcanza para comunicar completamente la intención del desarrollador. Es por ello que es útil acompaññar el código con *docstrings*.
-
-Un ***docstring*** no es más que *un comentario especial ubicado al inicio de una función, cuyo propósito es documentar brevemente su uso y servir como guía para los desarrolladores*. Generalmente se compone de tres partes:
-
-1.  **Descripción de la función:** Explica su propósito y contexto de uso.
-2.  **Descripción de los parámetros:** Detalla los argumentos de entrada, pudiendo incluir pre y post condiciones, así como información extra como los tipos de datos esperados.
-3.  **Valor de retorno:** Indica qué devuelve la función, con una descripción opcional del resultado y su tipo.
-
-Notar que los *docstrings* no sólo pueden aplicarse a funciones o clases, sino también a variables y otros elementos del código que requieran documentación estructurada.
-
-:::note
-*docstring* es el término utilizado en Python y otros lenguajes para este tipo de comentarios, pero la mayoría de los lenguajes modernos cuentan con formatos similares. Por ejemplo, JavaScript y TypeScript utilizan **JSDoc**, mientras que Java emplea **Javadoc**, entre otros estándares de documentación
-:::
-
-Muchos editores de código permiten visualizar los *docstrings* al colocar el cursor sobre el nombre de una función. Esto resulta especialmente útil al trabajar con librerías externas, ya que permite comprender mejor su uso sin necesidad de revisar la implementación o la documentación externa.
-
-Al escribir el *docstring* de una función, debemos siempre comparar el nombre de la función con lo escrito. Si un *docstring* resulta redundante con respecto al nombre de la función, entonces el nombre está bien elegido. Por otro lado, si el *docstring* utiliza verbos o sustantivos que no surgen en el nombre de la función, esto puede ser indicio de que el nombre está mal elegido. Por esta razón introducimos el siguiente lineamiento:
+If a comment refers to several statements, it may be a sign that those lines should be encapsulated in a function. If we
+add a descriptive name to that function, we have a function that can explain itself, thus avoiding the use of comments.
+Ideally, **code should not depend on comments for its understanding**. Although sometimes it is necessary to clarify
+aspects that cannot be expressed with code, these cases should be the exception and not the rule.
 
 :::tip[Pro Tip]
-Siempre escribir *docstring* y compararlos con el nombre de la función.
+Informational comments should be used exceptionally.
 :::
 
-El docstring debe aportar información que el nombre de la función no puede expresar por sí solo, como las excepciones que maneja, las unidades de medida de las variables o el formato del valor de retorno. Veamos nuevamente el ejemplo de la función anterior y analicemos su descripción mediante la documentación interna de TypeScript:
+There are situations where informational comments can add real value to the code and we must ensure that this really
+happens. A statement and a comment occupy the same space on the screen, which is why we must know when to use them.
+Now, what should a useful comment include?
+
+* **The *why* rather than the *what*:** A comment should clarify the intention behind a statement, rather than
+describing what it does.
+* **Additional context that the code cannot express by itself:** For example, if there is a technical limitation or a
+specific convention to follow.
+* **Important technical decisions:** Explain why a data structure was chosen over another or why a particular
+algorithm was implemented.
+* **Explanation of non-trivial solutions:** If a problem was solved in an unconventional way, it is useful to
+document it for future developers.
+
+It is not only important to know when and what to comment, but also how to do it. A good comment must be clear and easy
+to understand without omitting essential details. Furthermore, it must be brief and direct, avoiding any unnecessary
+clarification.
+
+### Tag Comments
+
+Within informational comments, we can find a subcategory: **tag comments** (or marker comments). Unlike comments that
+explain the code, these seek to communicate information to developers by pointing out possible problems, pending tasks,
+or known errors. They are distinguished because they begin with a *tag word* written in uppercase, which facilitates
+their identification in the code. Some of the most common tags are:
+
+* **TODO**: Indicates a pending task or some functionality that needs to be implemented.
+* **FIXME**: Indicates a problem that needs to be reviewed.
+* **BUG**: Points out a known error that must be fixed.
+* **HACK**: Marks a temporary or less than ideal solution that could be improved.
+
+Large work teams or companies usually define conventions on when and how to use these tags. In some cases, they even
+create their own *tag words* to reflect specific needs within the project.
+
+We must not forget that these comments should be temporary and not remain indefinitely in the code. Ideally, if one is
+working on surrounding code and it is possible to resolve the comment, it is good to do so. Another option is to
+periodically perform a global search in the project to identify these annotations.
+
+## Internal Documentation
+
+In **natural language semantics**, sometimes a good function or variable name simply is not enough to fully communicate
+the developer's intention. That is why it is useful to accompany the code with *docstrings*.
+
+A ***docstring*** is nothing more than *a special comment located at the beginning of a function, whose purpose is to
+briefly document its usage and serve as a guide for developers*. It is generally composed of three parts:
+
+1. **Function description:** Explains its purpose and context of use.
+2. **Parameter description:** Details the input arguments, which can include pre and post conditions, as well as extra
+information such as expected data types.
+3. **Return value:** Indicates what the function returns, with an optional description of the result and its type.
+
+Note that *docstrings* can apply not only to functions or classes but also to variables and other code elements that
+require structured documentation.
+
+:::note
+*docstring* is the term used in Python and other languages for this type of comments, but most modern languages have
+similar formats. For example, JavaScript and TypeScript use **JSDoc**, while Java uses **Javadoc**, among other
+documentation standards.
+:::
+
+Many code editors allow visualizing *docstrings* by hovering the cursor over the function name. This is especially
+useful when working with external libraries, as it allows understanding their usage better without needing to review the
+implementation or external documentation.
+
+When writing the *docstring* of a function, we must always compare the function name with what is written. If a
+*docstring* turns out to be redundant with respect to the function name, then the name is well chosen. On the other
+hand, if the *docstring* uses verbs or nouns that do not appear in the function name, this may be an indication that
+the name is poorly chosen. For this reason, we introduce the following guideline:
+
+:::tip[Pro Tip]
+Always write *docstrings* and compare them with the function name.
+:::
+
+The docstring must provide information that the function name cannot express alone, such as the exceptions it handles,
+the units of measurement of variables, or the format of the return value. Let's look again at the example of the
+previous function and analyze its description through TypeScript internal documentation:
 
 ```typescript
 /**
@@ -140,13 +197,21 @@ function calculateDistanceBetweenSatellites(
 
     // Code...
 }
+
 ```
 
-En primer lugar, podemos observar que hay un comentario en la definición del tipo `Coordinates`, que nos indica que si utilizamos este tipo, estamos tratando con valores de latitud y longitud en grados. Esto es crucial, porque previene errores inesperados relacionados con las unidades de medida.
+First, we can observe that there is a comment in the definition of the `Coordinates` type, which indicates that if we
+use this type, we are dealing with latitude and longitude values in degrees. This is crucial because it prevents
+unexpected errors related to units of measurement.
 
-Por otro lado, el comentario principal se encuentra en la función que calcula la distancia entre satélites. En este caso, se especifica que se utiliza la fórmula de *Haversine*, y se proporciona información sobre los tipos. Aunque en TypeScript la definición de tipos hace que esta parte sea redundante, en JavaScript puede ser muy útil. Por último, el comentario nos brinda información extra que no sabríamos sin leer la implementación, como que el tipo del valor de retorno es un número que expresa la distancia entre los dos satélites en **kilómetros**, o que la función lanzará una excepción en caso de valores inválidos para la latitud y la longitud.
+On the other hand, the main comment is found in the function that calculates the distance between satellites. In this
+case, it specifies that the *Haversine* formula is used, and information about types is provided. Although in
+TypeScript type definition makes this part redundant, in JavaScript it can be very useful. Finally, the comment gives
+us extra information that we would not know without reading the implementation, such as that the return value type is a
+number expressing the distance between the two satellites in **kilometers**, or that the function will throw an
+exception in case of invalid values for latitude and longitude.
 
-A continuación se presenta el código traducido a Python con su correspondiente *docstring*:
+Below is the code translated to Python with its corresponding *docstring*:
 
 ```python
 # Latitude and longitude in degrees
@@ -183,6 +248,11 @@ def calculate_distance_between_satellites(
     )
 
     # Code...
+
 ```
 
-En este código podemos notar algunas diferencias y similitudes entre **JSDoc** y **docstring**. Sin embargo, estas son solo las características principales de ellos, existen más detalles que pueden ser incluidos dependiendo del lenguaje y la implementación. Además, podemos encontrarnos con diversos formatos adicionales, como el utilizado en la librería `numpy` de Python, que tiene su propia convención para los *docstrings.* En general para Python es recomendable utilizar el formato propuesto por `PEP 257` o con modificaciones similares.
+In this code, we can notice some differences and similarities between **JSDoc** and **docstring**. However, these are
+only their main characteristics; there are more details that can be included depending on the language and
+implementation. Additionally, we can encounter diverse additional formats, such as the one used in the Python `numpy`
+library, which has its own convention for *docstrings*. In general for Python, it is recommended to use the format
+proposed by `PEP 257` or with similar modifications.

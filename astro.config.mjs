@@ -32,7 +32,7 @@ export default defineConfig({
 						},
 						{
 							label: 'Sintaxis y Semántica',
-							slug: 'sintaxis-y-semantica',
+							slug: 'syntax-and-semantic',
 							translations: { 'en': 'Syntax and Semantics' }
 						},
 						{
