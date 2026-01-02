@@ -38,7 +38,7 @@ export default defineConfig({
 						{
 							label: 'Diseño de Funciones',
 							slug: 'functions',
-							translations: { 'en': 'Design of Functions' }
+							translations: { 'en': 'Function Design' }
 						},
 						{
 							label: 'Documentación',
