@@ -21,7 +21,7 @@ of the first section until the thesis defense.
 # About Us
 
 <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
-<img src="/src/assets/fran.webp" alt="Francisco Zavalla" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" />
+<img src="/fran.webp" alt="Francisco Zavalla" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" />
 <blockquote style="margin: 0; padding-left: 20px; border-left: 3px solid #ccc; font-style: italic;">
 <p>I am a graduate of the Licentiate's Degree in Computer Science at FaMAF (2025).
 Furthermore, since 2022 I am a full-stack developer in TypeScript for blockchain applications on Cardano.</p>
@@ -42,5 +42,5 @@ I have been a teacher at FaMAF since ~2005.
 </p>
 <footer>— Matías David Lee (aka: Chun)</footer>
 </blockquote>
-<img src="/src/assets/chun.webp" alt="Francisco Zavalla" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" />
+<img src="/chun.webp" alt="Matias David Lee" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" />
 </div>
